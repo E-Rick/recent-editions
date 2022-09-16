@@ -1,11 +1,6 @@
 import { style, globalStyle } from '@vanilla-extract/css';
 import {
   atoms,
-  media,
-  typography,
-  colorTheme,
-  radii,
-  fontWeight,
 } from '@zoralabs/zord';
 
 globalStyle('html, body', {
@@ -13,21 +8,29 @@ globalStyle('html, body', {
   padding: 0,
 });
 
+export const image = style({
+  objectFit: 'cover',
+  height: '100%',
+  borderTopLeftRadius: 10,
+  borderTopRightRadius: 10,
+  width: '100%'
+})
+
 export const imageWrapper = style([
   {
-    objectFit: 'cover',
+    aspectRatio: '1/1',
+    position: 'relative',
     borderRadius: '8px 8px 0 0',
     borderBottom: '2px solid #F0F0F0',
+    cursor: 'pointer',
+    selectors: {
+      '&:hover': {
+        transition: '0.4s ease',
+        opacity: '0.8',
+      },
+    },
   },
-  // {
-  //   ':hover': {
-  //     transition: '0.4s ease',
-  //     opacity: '0.8',
-  //   },
-  // },
   atoms({
-    // borderRadius: 'curved',
-    size: ['x64', 'x64'],
   }),
 ]);
 
@@ -104,11 +107,34 @@ export const headingWrapper = style([
   atoms({
     w: '100vw',
     h: 'x24',
-    pos: 'fixed',
+    // pos: 'fixed',
     alignItems: 'center',
     justifyContent: 'space-between',
   }),
 ]);
+
+export const filterWrapper = style({
+  position: 'relative',
+  display: 'flex',
+  paddingLeft: 24,
+  zIndex: 2
+})
+
+export const filters = style([
+  {
+    // zIndex: '2',
+  }
+  , atoms({
+    w: '100vw',
+    // pos: 'fixed',
+    alignItems: 'center',
+    gap: 'x3',
+    whiteSpace: 'nowrap',
+    flexDirection: 'row-reverse',
+    pl: 'x4',
+    pr: 'x3',
+  }),
+])
 
 export const linkWrapper = style([
   {
@@ -121,6 +147,14 @@ export const linkWrapper = style([
     },
   },
 ]);
+
+export const feedWrapper = style({
+  width: '100%',
+  maxWidth: 1200,
+  paddingTop: 16,
+  overflowX: 'hidden',
+  margin: 'auto'
+})
 
 // export const hideMobile = style([
 //   {
