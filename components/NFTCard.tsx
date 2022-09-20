@@ -1,5 +1,6 @@
 import {
   Box,
+  Eyebrow,
   Flex,
   Label,
   Tag,
@@ -22,6 +23,9 @@ export const NFTCard = ({
   name,
   address,
   publicSalePrice,
+  maxSupply,
+  publicSaleEnd,
+  owner
 }) => {
 
   return (
@@ -39,9 +43,12 @@ export const NFTCard = ({
             <Label size='lg' className={cardTitle}>
               {name}
             </Label>
-            <Tag active={true}>${symbol}</Tag>
           </Flex>
-
+          <Flex align='center' gap='x2'>
+            <Tag active={true} display='inline-flex' style={{ letterSpacing: '.05em', fontWeight: '500' }} textTransform='uppercase' py='x1' px='x1' fontSize='12px' justifySelf='center' alignSelf='center'>${symbol}</Tag>
+            <Eyebrow>{maxSupply > 100000 ? 'Open Edition' : `Edition of ${maxSupply}`}</Eyebrow>
+          </Flex>
+          {publicSaleEnd}
           <Collect
             address={address}
             publicSalePrice={publicSalePrice}
