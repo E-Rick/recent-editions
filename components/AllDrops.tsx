@@ -35,7 +35,7 @@ const AllDrops = ({ filter, sorting }) => {
                 {
                   data.map((page) => {
                     //  data is an array of each page's api response
-                    return page.erc721Drops.map(({ name, address, owner, symbol, editionMetadata, salesConfig }) => {
+                    return page.erc721Drops.map(({ name, address, owner, symbol, editionMetadata, salesConfig, maxSupply }) => {
                       if (editionMetadata != null)
                         return (
                           <Box
@@ -49,6 +49,9 @@ const AllDrops = ({ filter, sorting }) => {
                               publicSalePrice={
                                 salesConfig.publicSalePrice
                               }
+                              owner={owner}
+                              maxSupply={maxSupply}
+                              publicSaleEnd={salesConfig.publicSaleEnd}
                             />
                           </Box>
                         );
