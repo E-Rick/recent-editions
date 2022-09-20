@@ -17,6 +17,8 @@ export enum EditionFilterTypes {
 export enum SortTypes {
   LATEST = 'Latest',
   OLDEST = 'Earliest',
+  ENDING_SOON = 'Ending Soon',
+  RECENTLY_ACTIVE = 'Recently Active',
 }
 
 const Home: NextPage = () => {
@@ -34,18 +36,19 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <Box className={filterWrapper}>
-        <PopUp padding='x2'
-          trigger={<Button
-            variant="secondary"
-            borderRadius='phat'
-            size="sm"
-            icon="ChevronDown"
-            onClick={() => setOpen(true)}
-            className={['sort-dropdown', filters]}
+        <PopUp padding='x2' triggerClassName={filters}
+          trigger={
+            <Button
+              variant="secondary"
+              borderRadius='phat'
+              size="sm"
+              icon="ChevronDown"
+              onClick={() => openDropdown}
+              className={['sort-dropdown', filterWrapper]}
 
-          >
-            {filter}
-          </Button>}>
+            >
+              {filter}
+            </Button>}>
           <Stack aria-label="Sort Dropdown" w="x64">
             {DEFAULT_FILTER_OPTIONS.map((option) => (
               <Button
