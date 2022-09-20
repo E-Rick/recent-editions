@@ -1,8 +1,9 @@
 import {
   Box,
+  Eyebrow,
   Flex,
   Label,
-  Tag,
+  Tag
 } from '@zoralabs/zord';
 
 import {
@@ -15,6 +16,7 @@ import { processImgURI } from 'utils/formatters';
 
 import { Collect } from './Collect';
 import Image from 'next/image'
+import { OPEN_EDITION_SIZE } from 'utils/constants';
 
 export const NFTCard = ({
   editionMetadata,
@@ -22,8 +24,17 @@ export const NFTCard = ({
   name,
   address,
   publicSalePrice,
+  maxSupply,
+  publicSaleEnd,
+  owner
 }) => {
-
+  // const endDate = useMemo(
+  //   () => new Date(Number(publicSaleEnd) * 1000),
+  //   [publicSaleEnd]
+  // )
+  const formattedTotalSupplyCount = Intl.NumberFormat('en', {
+    notation: 'standard',
+  }).format(parseInt(maxSupply))
   return (
     <Box className={cardWrapper}>
       <Box>
@@ -39,9 +50,15 @@ export const NFTCard = ({
             <Label size='lg' className={cardTitle}>
               {name}
             </Label>
-            <Tag active={true}>${symbol}</Tag>
           </Flex>
-
+          <Flex align='center' gap='x2'>
+            <Tag active={true} display='inline-flex' style={{ letterSpacing: '.05em', fontWeight: '500' }} textTransform='uppercase' py='x1' px='x1' fontSize='12px' justifySelf='center' alignSelf='center'>${symbol}</Tag>
+            <Eyebrow>{maxSupply > OPEN_EDITION_SIZE ? 'Open Edition' : `Edition of ${formattedTotalSupplyCount}`}</Eyebrow>
+          </Flex>
+          {/* <Text variant="paragraph-sm" align="right">
+            {endDate.toLocaleString(...dateOptions)}
+          </Text>
+          <CountdownTimer refresh targetTime={publicSaleEnd} prependText='Time Left: ' /> */}
           <Collect
             address={address}
             publicSalePrice={publicSalePrice}
