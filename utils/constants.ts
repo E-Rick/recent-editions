@@ -4,6 +4,7 @@ import { BigNumber } from 'ethers'
 // FETCH LIMIT
 export const LIMIT = 24
 
+export const SUBGRAPH_URL = 'https://api.thegraph.com/subgraphs/name/iainnash/zora-editions-mainnet'
 
 // Sort options
 export const LATEST = 'Latest'

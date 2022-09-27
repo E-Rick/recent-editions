@@ -3,13 +3,14 @@ import { SubgraphERC721Drop } from "models/subgraph";
 import { useMemo, useCallback } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import { LIMIT } from "utils/constants";
+import { SUBGRAPH_URL } from '../utils/constants';
 
 export type DropList = {
   erc721Drops: SubgraphERC721Drop[]
 }
 
 // Fetcher
-const dropsFetcher = (query: string, limit: number, offset: number, pageIndex: number) => request('https://api.thegraph.com/subgraphs/name/iainnash/zora-editions-mainnet', query, { limit, offset, pageIndex })
+export const dropsFetcher = (query: string, limit: number, offset: number, pageIndex: number) => request(SUBGRAPH_URL, query, { limit, offset, pageIndex })
 
 export function useInfiniteScroll<S>(query: string) {
   // A function to get the SWR key of each page,
@@ -17,7 +18,8 @@ export function useInfiniteScroll<S>(query: string) {
   // If `null` is returned, the request of that page won't start.
   const getKey = (pageIndex: number, previousPageData: DropList) => {
     if (query === '') return null;
-    if (previousPageData && !previousPageData?.erc721Drops.length) return null // reached the end
+    if (previousPageData && !previousPageData?.erc721Drops.length) return null // reached the end'
+    const offset = pageIndex * LIMIT
     return [query, LIMIT, pageIndex * LIMIT, pageIndex]                  // SWR key
   }
 

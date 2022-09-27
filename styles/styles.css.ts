@@ -153,6 +153,7 @@ export const feedWrapper = style({
   maxWidth: 1200,
   paddingTop: 16,
   overflowX: 'hidden',
+  overflowY: 'hidden',
   margin: 'auto'
 })
 
